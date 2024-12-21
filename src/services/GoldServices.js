@@ -1,7 +1,7 @@
 import requests from './httpService';
 
 const GoldServices = {
-  getAllGolds: async () => {
+    getAllGolds: async () => {
     return requests.get('/gold/all');
   },
 

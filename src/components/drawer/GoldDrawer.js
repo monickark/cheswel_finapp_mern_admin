@@ -27,8 +27,7 @@ const GoldDrawer = ({ id }) => {
 
   const [purchaseGram, setPurchaseGram] = useState(0);
   const [wastageGram, setWastageGram] = useState(0);
-  const [gramPrice, setGramPrice] = useState(0);
-  const [amount, setAmount] = useState(0);
+  const [gramPrice,   setGramPrice] = useState(0);
 
   const currency = globalSetting?.default_currency || "₹";
 
@@ -37,7 +36,7 @@ const GoldDrawer = ({ id }) => {
 
       <div className="w-full relative p-6 border-b border-gray-100 bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300">
         {id ? (
-          <Title title={("Update Gold")} description={("UpdateGoldText")} />
+          <Title title={("Update Gold")} description={("Update Gold Text")} />
         ) : (
           <Title title={("Add New Gold")} description={("Add Gold Details")} />
         )}

@@ -1,3 +1,4 @@
+import * as dayjs from 'dayjs';
 import { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
@@ -10,7 +11,6 @@ const useGoldSubmit = (id) => {
   const [goldPublished, setGoldPublished] = useState(true);
   const [purchasedDate, setPurchasedDate] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
-
   const { isDrawerOpen, closeDrawer, setIsUpdate } = useContext(SidebarContext);
 
   const {
@@ -22,7 +22,7 @@ const useGoldSubmit = (id) => {
   } = useForm();
 
   const onSubmit = async ({ goldName, purchasedDate, purchasedGram, wastageGram, gramPrice, amount, remarks}) => {
-    console.log(goldName, purchasedDate, purchasedGram, wastageGram, gramPrice, amount, remarks)
+    console.log(id, goldName, purchasedDate, purchasedGram, wastageGram, gramPrice, amount, remarks)
     // return notifyError("CRUD operation is disabled for this option!");
     try {
       setIsSubmitting(true);
@@ -64,12 +64,16 @@ const useGoldSubmit = (id) => {
       setPurchasedDate(true);
       setValue("purchasedDate");
       setValue("purchasedGram");
+      setValue("wastageGram");
+      setValue("purchasedAmount");
       setValue("gramPrice");
       setValue("amount");
       setValue("remarks");
       clearErrors("goldName");
       clearErrors("purchasedDate");
       clearErrors("purchasedGram");
+      clearErrors("wastageGram");
+      clearErrors("purchasedAmount");
       clearErrors("gramPrice");
       clearErrors("amount");
       clearErrors("remarks");
@@ -80,8 +84,15 @@ const useGoldSubmit = (id) => {
         try {
           const res = await GoldServices.getGoldById(id);
           if (res) {
-            setValue("name", res.name);
-            setValue("iso_code", res.iso_code);
+            console.log('Update gold dateilas retrieved : ', res);
+            setValue("goldName", res.goldName);
+            setValue("purchasedDate", dayjs(res.endTime).format('YYYY-MM-DD'));
+            setValue("purchasedGram", res.purchasedGram);
+            setValue("gramPrice", res.gramPrice);
+            setValue("wastageGram", res.wastageGram);
+            setValue("purchasedAmount", res.purchasedAmount);
+            setValue("amount", res.amount);
+            setValue("remarks", res.remarks);
             setGoldPublished(res.status === "show");
             setValue("status", res.status);
           }

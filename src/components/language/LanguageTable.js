@@ -15,7 +15,7 @@ const LanguageTable = ({ languages, isCheck, setIsCheck }) => {
   // console.log("language", languages);
   const handleClick = (e) => {
     const { id, checked } = e.target;
-    // console.log('click all id', id, checked);
+    console.log('click all id', id, checked);
     setIsCheck([...isCheck, id]);
     if (!checked) {
       setIsCheck(isCheck.filter((item) => item !== id));

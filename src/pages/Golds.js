@@ -45,6 +45,8 @@ const Golds = () => {
     handleChangePage,
   } = useFilter(data);
 
+  const { currency, globalSetting } = useFilter(data?.golds);
+
   const [isCheckAll, setIsCheckAll] = useState(false);
   const [isCheck, setIsCheck] = useState([]);
 
@@ -139,16 +141,19 @@ const Golds = () => {
                   </TableCell>
                   <TableCell>{t("Id")}</TableCell>
                   <TableCell>{t("Name")}</TableCell>
-                  <TableCell>{t("Purchase Date")}</TableCell>
-                  <TableCell>{t("Purchase Grams")}</TableCell>
-                  <TableCell>{t("Watage Grams")}</TableCell>
-                  <TableCell>{t("Price per Gram")}</TableCell>
-                  <TableCell>{t("Amount")}</TableCell>
+                  <TableCell className="text-center">{t("Purchase Date")}</TableCell>
+                  <TableCell className="text-center">{t("Purchase Grams")}</TableCell>
+                  <TableCell className="text-center">{t("Watage Grams")}</TableCell>
+                  <TableCell className="text-center">{t("Price per Gram")}</TableCell>
+                  <TableCell className="text-right">{t("Amount")}</TableCell>
                   <TableCell className="text-center">{t("GoldPublished")}</TableCell>
                   <TableCell className="text-right">{t("GoldActions")}</TableCell>
                 </tr>
               </TableHeader>
-              <GoldTable golds={dataTable} isCheck={isCheck} setIsCheck={setIsCheck} />
+              <GoldTable golds={dataTable} isCheck={isCheck} 
+              globalSetting={globalSetting} setIsCheck={setIsCheck} 
+              currency={globalSetting?.default_currency || "₹"}
+              />
             </Table>
             <TableFooter>
               <Pagination
